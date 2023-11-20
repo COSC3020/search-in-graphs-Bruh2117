@@ -19,7 +19,6 @@ function depthFirstSearch(graph, startNode, targetNode) {
         vertex = graph[startNode][i]; 
         if (visited[vertex] != true)
         {
-            visited.push(vertex); 
             path.push(vertex); 
             depthFirstSearch(graph, vertex, targetNode); 
         }
