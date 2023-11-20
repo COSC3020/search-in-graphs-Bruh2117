@@ -2,24 +2,27 @@ function depthFirstSearch(graph, startNode, targetNode) {
     const visited = []; 
     const path = []; 
 
-    while (visited.length < graph.length)
+    if (startNode == targetNode)
     {
-        if (startNode == targetNode)
-        {
-            path.push(startNode); 
-            return path; 
-        }
+        path.push(startNode); 
+        return path; 
+    }
+    if (visited.length >= graph.length)
+    {
+        return "No path found"; 
+    }
 
-        else 
+    visited[startNode] = true; 
+
+    for (var i = 0; i < graph[startNode].length; i++)
+    {
+        vertex = graph[startNode][i]; 
+        if (visited[vertex] != true)
         {
-            visited.push(startNode)
-            
-            for (var i = 0; i < graph.length; i++)
-            {
-                var row = graph[i]; 
-                depthFirstSearch(row, row[i], targetNode); 
-            }
+            visited.push(vertex); 
+            path.push(vertex); 
+            depthFirstSearch(graph, vertex, targetNode); 
         }
     }
-    return [];
+    path = [path[0]]; 
 }
