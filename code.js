@@ -7,6 +7,10 @@ function depthFirstSearch(graph, startNode, targetNode) {
         path.push(startNode); 
         return path; 
     }
+    if (graph.length == 1 && startNode != targetNode)
+    {
+        return "Target node not in graph"; 
+    }
     if (visited.length >= graph.length)
     {
         return "No path found"; 

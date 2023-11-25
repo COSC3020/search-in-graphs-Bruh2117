@@ -1,12 +1,16 @@
-import {depthFirstSearch} from './code.js'; 
-var graph = 
-[
-    [1, 3], 
-    [0, 2, 4],
-    [2],
-    [0, 4],
-    [1, 3, 5],
-    [4]
-]
+const fs = require('fs');
+const jsc = require('jsverify');
 
-return depthFirstSearch(graph, 0, 5);
+eval(fs.readFileSync('code.js')+'');
+
+const test =
+    jsc.forall("array nat", "nat", "nat", function(arr, startNode, targetNode) {
+        var graph = JSON.parse(JSON.stringify(arr));
+        var startNodeCopy = JSON.parse(JSON.stringify(startNode));
+        var targetNodeCopy = JSON.parse(JSON.stringify(targetNode));
+        return depthFirstSearch(graph, startNodeCopy, targetNodeCopy).includes(targetNodeCopy) ==
+            graph.some(function(node)
+                { return node === targetNodeCopy; });
+    });
+
+jsc.assert(test);
