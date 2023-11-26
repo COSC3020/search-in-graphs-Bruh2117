@@ -2,14 +2,21 @@ function depthFirstSearch(graph, startNode, targetNode) {
     const visited = []; 
     const path = []; 
 
+    // Base cases 
+    if (graph.length == 0)
+    {
+        return "No graph to search"; 
+    }
+    if (graph.length == 1 && startNode != targetNode)
+    {
+        return "No path to desired node"; 
+    }
+
+    // Start Search
     if (startNode == targetNode)
     {
         path.push(startNode); 
         return path; 
-    }
-    if (graph.length == 1 && startNode != targetNode)
-    {
-        return "Target node not in graph"; 
     }
     if (visited.length >= graph.length)
     {
